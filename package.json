@@ -12,6 +12,7 @@
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
     "express": "~4.16.1",
+    "prop-types": "^15.8.1",
     "redis": "^4.2.0",
     "source-map-loader": "^4.0.0"
   },
