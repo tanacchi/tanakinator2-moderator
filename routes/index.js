@@ -11,6 +11,9 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
+  const userId = req.body.userId;
+  const device = req.body.device;
+  redisClient.set(userId, device);
   res.status(204).send()
 })
 

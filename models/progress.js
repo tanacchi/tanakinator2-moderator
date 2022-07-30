@@ -11,7 +11,12 @@ const get = async (key) => {
     return result;
 }
 
+const set = async (key, value) => {
+    await redisClient.set(key, value);
+}
+
 module.exports = {
     getAll,
     get,
+    set,
 };
