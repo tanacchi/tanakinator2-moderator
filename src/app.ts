@@ -1,21 +1,17 @@
 'use strict'
 
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import * as express from 'express';
+import * as cookieParser from 'cookie-parser';
+import * as logger from 'morgan';
 
-const indexRouter = require('./routes/index');
+import router from './routes';
 
-const app = (() => {
-    const express = require('express');
-    const app = express();
-    app.use(logger('dev'));
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: false }));
-    app.use(cookieParser());
+const app = express();
+app.use(logger('debug'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-    app.use('/', indexRouter);
-    return app;
-})()
+app.use('/', router);
 
-module.exports = app;
+export default app;

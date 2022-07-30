@@ -1,15 +1,15 @@
 'use strict'
 
-const redis = require('redis');
+import * as redis from 'redis';
 require('dotenv').config();
 
 const client = redis.createClient({
     socket: {
         host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT,
+        port: Number(process.env.REDIS_PORT),
     },
 });
 client.on('error', (err) => console.log('Redis Client Error', err));
 (async () => { await client.connect() })();
 
-exports.client = client;
+export default client;

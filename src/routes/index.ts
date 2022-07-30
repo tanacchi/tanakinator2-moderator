@@ -1,28 +1,28 @@
 'use strict'
 
-const express = require('express');
-const router = express.Router();
-const redisClient = require('../models/progress');
+import * as express from 'express';
+import { progressStore } from "../models/progress";
 
+const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-  const results = await redisClient.getAll();
+  const results = await progressStore.getAll();
   res.status(200).json({ results });
 });
 
 router.post('/', async (req, res, next) => {
   const userId = req.body.userId;
   const device = req.body.device;
-  redisClient.set(userId, device);
+  progressStore.set(userId, device);
   res.status(204).send()
 })
 
 router.get('/:id', async (req, res, next) => {
-  const value = await redisClient.get(req.params.id);
+  const value = await progressStore.get(req.params.id);
   res.status(200).json({
     value,
   })
 })
 
 
-module.exports = router;
+export default router;

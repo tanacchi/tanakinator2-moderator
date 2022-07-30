@@ -1,32 +1,30 @@
 'use strict'
 
-const { client } = require('./config');
+import client from './config';
 require('dotenv').config();
 
-const getAll = async () => {
-    const iterator = client.scanIterator();
-    let results = [];
-    // TODO: Use iterator-helpers in the future
-    for await (const key of iterator) {
-        results.push({
-            key,
-            value: (await client.get(key))
-        })
+class ProgressStore {
+    public async getAll() {
+        const iterator = client.scanIterator();
+        let results = [];
+        // TODO: Use iterator-helpers in the future
+        for await (const key of iterator) {
+            results.push({
+                key,
+                value: (await client.get(key))
+            })
+        }
+        return results;
     }
-    return results;
+
+    public async get(key) {
+        const result = await client.get(key);
+        return result;
+    }
+
+    public async set(key, value) {
+        await client.set(key, value);
+    }
 }
 
-const get = async (key) => {
-    const result = await client.get(key);
-    return result;
-}
-
-const set = async (key, value) => {
-    await client.set(key, value);
-}
-
-module.exports = {
-    getAll,
-    get,
-    set,
-};
+export const progressStore = new ProgressStore();
