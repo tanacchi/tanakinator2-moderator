@@ -1,3 +1,5 @@
+'use strict'
+
 const client = require('./config');
 require('dotenv').config();
 

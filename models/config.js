@@ -1,3 +1,5 @@
+'use strict'
+
 const redis = require('redis');
 require('dotenv').config();
 
