@@ -2,6 +2,7 @@
 
 import client from './client';
 import { ProgressSimple, ProgressDetail, ProgressPost } from "../types/progressType";
+import { Status } from '../constants/status';
 
 class ProgressStore {
     public async getAll(): Promise<Array<ProgressSimple>> {
@@ -11,8 +12,9 @@ class ProgressStore {
         for await (const key of iterator) {
             results.push({
                 key,
-                value: (await client.get(key))
-            })
+                value: (await client.get(key)),
+                status: Status.WAITING,
+            });
         }
         return results;
     }
