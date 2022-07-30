@@ -1,7 +1,6 @@
 'use strict'
 
 import client from './client';
-require('dotenv').config();
 
 class ProgressStore {
     public async getAll() {
