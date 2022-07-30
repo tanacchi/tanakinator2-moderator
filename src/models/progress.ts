@@ -1,6 +1,6 @@
 'use strict'
 
-import client from './config';
+import client from './client';
 require('dotenv').config();
 
 class ProgressStore {
