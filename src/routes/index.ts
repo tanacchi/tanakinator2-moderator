@@ -17,6 +17,7 @@ router.post('/:id', async (req, res, next) => {
   const diff: ProgressPost = {
     device: req.body.device,
     status: req.body.status,
+    newQuestion: req.body.newQuestion,
   }
   progressStore.set(userId, diff);
   res.status(204).send()
