@@ -1,7 +1,6 @@
 'use strict'
 
 import * as express from 'express';
-import { Status } from '../constants/status';
 import { progressStore } from "../models/progress";
 import { ProgressSimple, ProgressDetail, ProgressPost } from "../types/progressType";
 
