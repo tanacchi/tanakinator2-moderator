@@ -1,11 +1,10 @@
 'use strict'
 
 import * as express from 'express';
-import * as dotenv from "dotenv";
 import config from './config/config';
 import router from './routes';
 
-const app = express();
+const app: express.Express = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
