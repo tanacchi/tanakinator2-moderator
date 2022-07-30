@@ -6,4 +6,12 @@ const getAll = async () => {
     console.log(results);
 }
 
-module.exports = getAll;
+const get = async (key) => {
+    const result = await redisClient.get(key);
+    return result;
+}
+
+module.exports = {
+    getAll,
+    get,
+};

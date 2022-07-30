@@ -1,22 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const getAll = require('../models/progress');
+const redisClient = require('../models/progress');
 
 
 router.get('/', async (req, res, next) => {
-  await getAll();
+  await redisClient.getAll();
   res.status(200).json({
     message: "root",
   })
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   res.status(204).send()
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
+  const value = await redisClient.get(req.params.id);
   res.status(200).json({
-    message: "get",
+    value,
   })
 })
 
