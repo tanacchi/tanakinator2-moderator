@@ -1,6 +1,7 @@
 'use strict'
 
 import * as express from 'express';
+import { Status } from '../constants/status';
 import { progressStore } from "../models/progress";
 import { ProgressSimple, ProgressDetail, ProgressPost } from "../types/progressType";
 
@@ -11,10 +12,13 @@ router.get('/', async (req, res, next) => {
   res.status(200).json({ results });
 });
 
-router.post('/', async (req, res, next) => {
-  const userId: string = req.body.userId;
-  const device: string = req.body.device;
-  progressStore.set(userId, device);
+router.post('/:id', async (req, res, next) => {
+  const userId: string = req.params.id;
+  const diff: ProgressPost = {
+    device: req.body.device,
+    status: req.body.status,
+  }
+  progressStore.set(userId, diff);
   res.status(204).send()
 })
 

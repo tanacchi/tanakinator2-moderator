@@ -1,7 +1,7 @@
 'use strict'
 
 import client from './client';
-import { ProgressSimple, ProgressDetail, ProgressPost } from "../types/progressType";
+import { ProgressSimple, ProgressDetail, ProgressPost, appendIfExists, initProgress } from "../types/progressType";
 import { Status } from '../constants/status';
 
 class ProgressStore {
@@ -20,12 +20,19 @@ class ProgressStore {
     }
 
     public async get(key: string): Promise<ProgressDetail>  {
-        const result: ProgressDetail = await client.get(key);
-        return result;
+        const found: string|null = await client.get(key);
+        return found ? JSON.parse(found) : initProgress();
     }
 
-    public async set(key: string, value: ProgressPost): Promise<void> {
-        await client.set(key, value);
+    public async set(userId: string, diff: ProgressPost): Promise<void> {
+        let progress: ProgressDetail = await this.get(userId);
+        progress.device = diff.device;
+        progress.status = diff.status;
+        progress.questions = appendIfExists(progress.questions, diff.newQuestion);
+        progress.answers = appendIfExists(progress.answers, diff.newAnswer);
+        progress.nextAnswerTo = diff.nextAnswerTo;
+        progress.guessingThat = diff.guessingThat;
+        await client.set(userId, JSON.stringify(progress));
     }
 }
 
