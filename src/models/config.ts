@@ -1,7 +1,8 @@
 'use strict'
 
 import * as redis from 'redis';
-require('dotenv').config();
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const client = redis.createClient({
     socket: {
