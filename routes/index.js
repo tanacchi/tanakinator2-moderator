@@ -1,7 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const getAll = require('../models/progress');
 
-router.get('/', (req, res, next) => {
+
+router.get('/', async (req, res, next) => {
+  await getAll();
   res.status(200).json({
     message: "root",
   })
