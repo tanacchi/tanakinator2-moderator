@@ -1,7 +1,17 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const config = {
+interface ServerProps {
+    readonly host: string,
+    readonly port: number,
+}
+
+interface ConfigType {
+    readonly app: ServerProps,
+    readonly redis: ServerProps,
+}
+
+const config: ConfigType = {
     app: {
         host: process.env.APP_HOST || 'localhost',
         port: Number(process.env.APP_PORT) || 3000,
