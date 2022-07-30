@@ -2,8 +2,16 @@ const client = require('./config');
 require('dotenv').config();
 
 const getAll = async () => {
-    const results = await client.get('*');
-    console.log(results);
+    const iterator = client.scanIterator();
+    let results = [];
+    // TODO: Use iterator-helpers in the future
+    for await (const key of iterator) {
+        results.push({
+            key,
+            value: (await client.get(key))
+        })
+    }
+    return results;
 }
 
 const get = async (key) => {

@@ -4,10 +4,8 @@ const redisClient = require('../models/progress');
 
 
 router.get('/', async (req, res, next) => {
-  await redisClient.getAll();
-  res.status(200).json({
-    message: "root",
-  })
+  const results = await redisClient.getAll();
+  res.status(200).json({ results });
 });
 
 router.post('/', async (req, res, next) => {
