@@ -18,7 +18,7 @@ describe("Integration test", () => {
       .post(`/${testId}`)
       .send({
         device: "line",
-        status: "pending",
+        status: "waiting",
         newQuestion: 2,
       });
     expect(response.statusCode).toBe(204);
@@ -29,7 +29,7 @@ describe("Integration test", () => {
     expect(response.statusCode).toBe(200);
     const responseData = JSON.parse(response.text);
     expect(responseData.result.device).toBe("line");
-    expect(responseData.result.status).toBe("pending");
+    expect(responseData.result.status).toBe("waiting");
     expect(responseData.result.questions).toStrictEqual([2]);
   });
 
@@ -49,5 +49,16 @@ describe("Integration test", () => {
     expect(responseData.result.device).toBe("web");
     expect(responseData.result.status).toBe("asking");
     expect(responseData.result.questions).toStrictEqual([2, 4]);
+  });
+
+  test("不適な status に対し 400 を返す",async () => {
+    const response = await request(app)
+      .post(`/${testId}`)
+      .send({
+        device: "line",
+        status: "pending", // Invalid Status
+        newQuestion: 2,
+      });
+    expect(response.statusCode).toBe(400);
   });
 });

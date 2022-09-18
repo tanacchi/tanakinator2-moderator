@@ -1,6 +1,7 @@
 'use strict'
 
 import * as express from 'express';
+import { STATUS_PATTERN } from '../constants/status';
 import { progressStore } from "../models/progress";
 import { ProgressSimple, ProgressDetail, ProgressPost } from "../types/progressType";
 
@@ -17,6 +18,10 @@ router.post('/:id', async (req, res, next) => {
     device: req.body.device,
     status: req.body.status,
     newQuestion: req.body.newQuestion,
+  }
+  if (!STATUS_PATTERN.includes(diff.status)) {
+    res.status(400).send("Invalid status.");
+    return;
   }
   progressStore.set(userId, diff);
   res.status(204).send()
