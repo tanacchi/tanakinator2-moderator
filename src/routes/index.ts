@@ -1,5 +1,3 @@
-'use strict'
-
 import * as express from 'express';
 import { STATUS_PATTERN } from '../constants/status';
 import { progressStore } from "../models/progress";

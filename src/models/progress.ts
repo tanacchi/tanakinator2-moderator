@@ -1,5 +1,3 @@
-'use strict'
-
 import client from './client';
 import { ProgressSimple, ProgressDetail, ProgressPost, appendIfExists, initProgress } from "../types/progressType";
 

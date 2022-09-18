@@ -1,5 +1,3 @@
-'use strict'
-
 import * as redis from 'redis';
 import config from '../config/config';
 
