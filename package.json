@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "doc": "documentation build src/** -f html -o docs",
+    "doc": "documentation build src/** -f html --github -o docs",
     "lint": "eslint . --ext .ts",
     "start": "ts-node src/server.ts",
     "start:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
