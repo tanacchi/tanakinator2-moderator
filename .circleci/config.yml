@@ -1,16 +1,30 @@
 version: 2.1
 
 jobs:
-  run:
+  setup-docker:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
+  test:
+    docker:
+      - image: cimg/node:16.16.0
+      - image: cimg/redis:7.0.4
+    steps:
+      - checkout
+      - run:
+          name: Install packages
+          command: npm install --force  # どうにかしないと
+      - run:
+          name: Run tests
+          command: npm test
+
 
 workflows:
   deploy:
     jobs:
-      - run
+      - test
+      - setup-docker
 
