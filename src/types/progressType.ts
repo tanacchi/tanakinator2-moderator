@@ -37,7 +37,7 @@ export function initProgress(): ProgressDetail {
 
 export function appendIfExists<T>(property: Array<T>|undefined, elem: T|undefined): Array<T> {
     if (!elem) {
-        return property;
+        return property ?? [];
     }
     return property?.concat(elem) || [ elem ];
 }
