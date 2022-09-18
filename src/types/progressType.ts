@@ -17,7 +17,7 @@ export interface ProgressDetail {
     answers?: Array<number>,
     nextAnswerTo?: number,
     guessingThat?: number,
-};
+}
 
 export interface ProgressPost {
     device: DeviceType,

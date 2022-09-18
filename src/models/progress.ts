@@ -4,7 +4,7 @@ import { ProgressSimple, ProgressDetail, ProgressPost, appendIfExists, initProgr
 class ProgressStore {
     public async getAll(): Promise<Array<ProgressSimple>> {
         const iterator: AsyncIterable<string> = client.scanIterator();
-        let results: Array<ProgressSimple> = [];
+        const results: Array<ProgressSimple> = [];
         // TODO: Use iterator-helpers in the future
         for await (const userId of iterator) {
             const progress: ProgressDetail = await this.get(userId);
