@@ -1,4 +1,3 @@
-// import * as request from "supertest";
 import * as request from "supertest";
 import app from "../src/app";
 
@@ -60,5 +59,16 @@ describe("Integration test", () => {
         newQuestion: 2,
       });
     expect(response.statusCode).toBe(400);
+  });
+
+
+  test("ユーザが存在しない場合，初期値を返す",async () => {
+    const randomId = `test_${(Math.random() + 1).toString(36).substring(2)}`;
+    const response = await request(app).get(`/${randomId}`);
+    expect(response.statusCode).toBe(200);
+    const responseData = JSON.parse(response.text);
+    expect(responseData.result.device).toBe("web");
+    expect(responseData.result.status).toBe("waiting");
+    expect(responseData.result.questions).toBe(undefined);
   });
 });
