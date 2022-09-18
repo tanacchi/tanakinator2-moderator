@@ -5,4 +5,4 @@ export const Status = {
     UPDATING: "updating",
 } as const;
 
-export const STATUS_PATTERN = Object.keys(Status);
+export const STATUS_PATTERN = Object.values(Status);
