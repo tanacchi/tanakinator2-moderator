@@ -26,12 +26,15 @@ class ProgressStore {
 
     public async set(userId: string, diff: ProgressPost): Promise<void> {
         let progress: ProgressDetail = await this.get(userId);
-        progress.device = diff.device;
-        progress.status = diff.status;
-        progress.questions = appendIfExists(progress.questions, diff.newQuestion);
-        progress.answers = appendIfExists(progress.answers, diff.newAnswer);
-        progress.nextAnswerTo = diff.nextAnswerTo;
-        progress.guessingThat = diff.guessingThat;
+        progress = {
+          ...progress,
+          device: diff.device,
+          status: diff.status,
+          questions: appendIfExists(progress.questions, diff.newQuestion),
+          answers: appendIfExists(progress.answers, diff.newAnswer),
+          nextAnswerTo: diff.nextAnswerTo,
+          guessingThat: diff.guessingThat,
+        };
         await client.set(userId, JSON.stringify(progress));
     }
 }
