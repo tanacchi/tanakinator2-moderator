@@ -9,11 +9,20 @@ import {
 
 const router: express.Router = express.Router();
 
+/**
+ * 進行状況サマリの全件取得
+ * @returns {Array<ProgressSimple>} 進行状況サマリのリスト
+ */
 router.get("/", async (req, res) => {
   const results: Array<ProgressSimple> = await progressStore.getAll();
   res.status(200).json({ results });
 });
 
+/**
+ * ユーザの進行状況を登録
+ * @param {string} ユーザ ID
+ * @returns {string} 完了メッセージ
+ */
 router.post("/:id", async (req, res) => {
   const userId: string = req.params.id;
   const diff: ProgressPost = {
@@ -29,6 +38,11 @@ router.post("/:id", async (req, res) => {
   res.status(204).send();
 });
 
+/**
+ * ユーザの進行状況詳細を取得
+ * @param {string} ユーザ ID
+ * @returns {ProgressDetail} 進行状況詳細
+ */
 router.get("/:id", async (req, res) => {
   const result: ProgressDetail = await progressStore.get(req.params.id);
   res.status(200).json({
