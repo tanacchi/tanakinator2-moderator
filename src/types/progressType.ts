@@ -1,15 +1,17 @@
+import { Device } from "../constants/device";
 import { Status } from "../constants/status";
 
 export type StatusType = typeof Status[keyof typeof Status];
+export type DeviceType = typeof Device[keyof typeof Device];
 
 export interface ProgressSimple {
     userId: string,
-    device: string,
+    device: DeviceType,
     status: StatusType,
 }
 
 export interface ProgressDetail {
-    device: string,
+    device: DeviceType,
     status: StatusType,
     questions?: Array<number>,
     answers?: Array<number>,
@@ -18,7 +20,7 @@ export interface ProgressDetail {
 };
 
 export interface ProgressPost {
-    device: string,
+    device: DeviceType,
     status: StatusType,
     newQuestion?: number,
     newAnswer?: number,
@@ -28,7 +30,7 @@ export interface ProgressPost {
 
 export function initProgress(): ProgressDetail {
     return {
-        device: "web",
+        device: Device.WEB,
         status: Status.WAITING,
     } as ProgressDetail;
 }
