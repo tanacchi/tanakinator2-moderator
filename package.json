@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "doc": "documentation build src/** -f html -o docs",
     "lint": "eslint . --ext .ts",
     "start": "ts-node src/server.ts",
     "start:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
@@ -27,6 +28,7 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "documentation": "^14.0.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
