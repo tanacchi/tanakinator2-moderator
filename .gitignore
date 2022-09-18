@@ -157,3 +157,6 @@ dist
 
 # Docker
 volumes/*
+
+# Auto-Generated document
+docs/*
