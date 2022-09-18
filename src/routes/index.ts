@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
 });
 
 /**
- * ユーザに対して進行状況を登録
+ * ユーザの進行状況を登録
  * @param {string} ユーザ ID
  * @returns {string} 完了メッセージ
  */
@@ -39,7 +39,7 @@ router.post("/:id", async (req, res) => {
 });
 
 /**
- * ユーザ ID 指定で進行状況詳細を取得
+ * ユーザの進行状況詳細を取得
  * @param {string} ユーザ ID
  * @returns {ProgressDetail} 進行状況詳細
  */
