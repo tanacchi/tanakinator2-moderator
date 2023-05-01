@@ -10,8 +10,25 @@ import {
 const router: express.Router = express.Router();
 
 /**
- * 進行状況サマリの全件取得
- * @returns {Array<ProgressSimple>} 進行状況サマリのリスト
+ * @swagger
+ * /api/progress/:
+ *   get:
+ *     description: 全ユーザのプログレスのサマリを取得.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: name
+ *         description: アナタの名前
+ *         in: query
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: nameにJohnを指定した場合、挨拶を返す
+ *         examples:
+ *           result:
+ *              message: Hello Jon!
+ *              yourName: John
  */
 router.get("/", async (req, res) => {
   const results: Array<ProgressSimple> = await progressStore.getAll();
@@ -19,9 +36,29 @@ router.get("/", async (req, res) => {
 });
 
 /**
- * ユーザの進行状況を登録
- * @param {string} ユーザ ID
- * @returns {string} 完了メッセージ
+ * @swagger
+ * parameter:
+ *   userIdPathParam:
+ *     in: path
+ *     name: id
+ *     description: ユーザーID
+ *     required: true
+ *     type: string
+ */
+/**
+ * @swagger
+ * /api/progress/{id}:
+ *   post:
+ *     description: プログレスを更新.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - $ref: '#/userIdPathParam'
+ *     responses:
+ *       204:
+ *         description: 正常に更新.
+ *       400:
+ *         description: status の値が不正など.
  */
 router.post("/:id", async (req, res) => {
   const userId: string = req.params.id;
@@ -39,9 +76,28 @@ router.post("/:id", async (req, res) => {
 });
 
 /**
- * ユーザの進行状況詳細を取得
- * @param {string} ユーザ ID
- * @returns {ProgressDetail} 進行状況詳細
+ * @swagger
+ * /api/progress/{id}:
+ *   get:
+ *     description: ID 指定でプログレスを取得.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: ユーザーID
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: 該当するユーザのプログレスの詳細情報を返す.
+ *         examples:
+ *           result:
+ *              userId: test_1682930311994
+ *              device: web
+ *              status: asking
+ *              questions: [2, 4]
+ *              answers: [0, 1]
  */
 router.get("/:id", async (req, res) => {
   const result: ProgressDetail = await progressStore.get(req.params.id);
