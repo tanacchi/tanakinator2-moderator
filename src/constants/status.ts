@@ -21,6 +21,24 @@ export const Status = {
   GUESSING: "guessing",
 
   /**
+   * 再開するかの選択待ち.
+   * @param {string} resuming
+   */
+  RESUMING: "resuming",
+
+  /**
+   * 候補を出して正解を選んでもらって回答待ち.
+   * @param {string} begging
+   */
+  BEGGING: "begging",
+
+  /**
+   * 正解を文字列で尋ねて返答待ち.
+   * @param {string} reporting
+   */
+  REPORTING: "reporting",
+
+  /**
    * ゲーム終了後データ更新中
    * @param {string} updating
    */
