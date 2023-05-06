@@ -34,6 +34,8 @@ router.post("/:id", async (req, res) => {
     res.status(400).send("Invalid status.");
     return;
   }
+  console.log("diff:");
+  console.log(diff);
   progressStore.set(userId, diff);
   res.status(204).send();
 });
