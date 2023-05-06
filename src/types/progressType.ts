@@ -28,25 +28,25 @@ export interface ProgressSimple {
  * @prop {StatusType} status
  * @prop {Array<number>} questions
  * @prop {Array<number>} answers
- * @prop {number} nextAnswerTo
- * @prop {number} guessingThat
+ * @prop {number} next_answer_to
+ * @prop {number} guessing_that
  */
 export interface ProgressDetail {
   device: DeviceType;
   status: StatusType;
   questions?: Array<number>;
   answers?: Array<number>;
-  nextAnswerTo?: number;
-  guessingThat?: number;
+  next_answer_to?: number;
+  guessing_that?: number;
 }
 
 export interface ProgressPost {
   device: DeviceType;
   status: StatusType;
-  newQuestion?: number;
-  newAnswer?: number;
-  nextAnswerTo?: number;
-  guessingThat?: number;
+  new_question?: number;
+  new_answer?: number;
+  next_answer_to?: number;
+  guessing_that?: number;
 }
 
 export function initProgress(): ProgressDetail {

@@ -21,7 +21,7 @@ describe("Integration test", () => {
     const response = await request(app).post(`/${testId}`).send({
       device: "line",
       status: "waiting",
-      newQuestion: 2,
+      new_question: 2,
     });
     expect(response.statusCode).toBe(204);
   });
@@ -39,7 +39,7 @@ describe("Integration test", () => {
     const response1 = await request(app).post(`/${testId}`).send({
       device: "web",
       status: "asking",
-      newQuestion: 4,
+      new_question: 4,
     });
     expect(response1.statusCode).toBe(204);
 
@@ -55,7 +55,7 @@ describe("Integration test", () => {
     const response = await request(app).post(`/${testId}`).send({
       device: "line",
       status: "pending", // Invalid Status
-      newQuestion: 2,
+      new_question: 2,
     });
     expect(response.statusCode).toBe(400);
   });

@@ -34,10 +34,10 @@ class ProgressStore {
       ...progress,
       device: diff.device,
       status: diff.status,
-      questions: appendIfExists(progress.questions, diff.newQuestion),
-      answers: appendIfExists(progress.answers, diff.newAnswer),
-      nextAnswerTo: diff.nextAnswerTo,
-      guessingThat: diff.guessingThat,
+      questions: appendIfExists(progress.questions, diff.new_question),
+      answers: appendIfExists(progress.answers, diff.new_answer),
+      next_answer_to: diff.next_answer_to,
+      guessing_that: diff.guessing_that,
     };
     await client.set(userId, JSON.stringify(progress));
   }
