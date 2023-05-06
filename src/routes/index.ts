@@ -28,12 +28,14 @@ router.post("/:id", async (req, res) => {
   const diff: ProgressPost = {
     device: req.body.device,
     status: req.body.status,
-    newQuestion: req.body.newQuestion,
+    new_question: req.body.new_question,
   };
   if (!STATUS_PATTERN.includes(diff.status)) {
     res.status(400).send("Invalid status.");
     return;
   }
+  console.log("diff:");
+  console.log(diff);
   progressStore.set(userId, diff);
   res.status(204).send();
 });
