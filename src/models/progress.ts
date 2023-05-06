@@ -39,6 +39,8 @@ class ProgressStore {
       next_answer_to: diff.next_answer_to,
       guessing_that: diff.guessing_that,
     };
+    console.log("new progress:");
+    console.log(progress);
     await client.set(userId, JSON.stringify(progress));
   }
 }

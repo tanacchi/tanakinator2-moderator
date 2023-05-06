@@ -60,8 +60,11 @@ export function appendIfExists<T>(
   property: Array<T> | undefined,
   elem: T | undefined
 ): Array<T> {
-  if (!elem) {
-    return property ?? [];
+  if (!property) {
+    property = property ?? [];
+  }
+  if (elem === undefined) {
+    return property;
   }
   return property?.concat(elem) || [elem];
 }
